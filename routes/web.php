@@ -27,6 +27,13 @@ Route::post('/games','GameController@store')->name('games.store');
 
 Route::get('/games/{game}','GameController@show')->name('games.show');
 
+Route::get('/games/{game}/edit','GameController@edit')->name('games.edit');
+
+Route::put('/games/{game}','GameController@update')->name('games.update');
+
+Route::delete('/games/{game}','GameController@destroy')->name('games.destroy');
+
+
 Route::get('/posts', 'PostController@index')->name('posts.index');
 
 Route::get('/posts/create', 'PostController@create')->name('posts.create');
@@ -34,6 +41,12 @@ Route::get('/posts/create', 'PostController@create')->name('posts.create');
 Route::post('/posts', 'PostController@store')->name('posts.store');
 
 Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+
+Route::get('/posts/{post}/edit','PostController@edit')->name('posts.edit');
+
+Route::put('/posts/{post}','PostController@update')->name('posts.update');
+
+Route::delete('/posts/{post}','PostController@destroy')->name('posts.destroy');
 
 
 

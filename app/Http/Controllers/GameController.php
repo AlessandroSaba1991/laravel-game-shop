@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Http\Requests\GameRequest;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -38,13 +39,24 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GameRequest $request)
     {
         //dd($request->all());//['title' => 'fifa 2022']
         /* ALTERNATIVA */
         /* aggiundere sul model game protected $fillable = [tutti i campi] */
-        $data = $request->all();
-        Game::create($data);
+
+        /* $data = $request->all();
+        Game::create($data); */
+       /*  $validate_data = $request->validate([
+            'title' => 'required|max:120',
+            'thumb' => 'nullable',
+            'cover_image' => 'nullable',
+            'description' => 'nullable',
+        ]); */
+        //dd($validate_data);
+        $validate_data = $request->validated();
+        //dd($validate_data);
+        Game::create($validate_data);
         /* //creiamo instanza
         $game = new Game();
         //assegnamo valori
@@ -77,7 +89,7 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        //
+        return view('games.edit',compact('game'));
     }
 
     /**
@@ -87,9 +99,19 @@ class GameController extends Controller
      * @param  \App\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(GameRequest $request, Game $game)
     {
-        //
+        /* $validate_data = $request->validate([
+            'title' => 'required|max:120',
+            'thumb' => 'nullable',
+            'cover_image' => 'nullable',
+            'description' => 'nullable',
+        ]); */
+        $validate_data = $request->validated();
+        //dd($validate_data);
+        //$data = $request->all();
+        $game->update($validate_data);
+        return redirect()->route('games.show',$game);
     }
 
     /**
@@ -100,6 +122,8 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        $game->delete();
+        return redirect()->route('games.index');
     }
+
 }
