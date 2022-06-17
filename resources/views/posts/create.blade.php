@@ -17,7 +17,7 @@
         <div class="form-group">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" aria-describedby="titleHelper" value="{{old('cover_image')}}">
+                <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" aria-describedby="titleHelper" value="{{old('title')}}">
                 <small id="titleHelper" class="text-muted">Write a title</small>
                 @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
